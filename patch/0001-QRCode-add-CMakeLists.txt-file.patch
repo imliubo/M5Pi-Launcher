@@ -1,0 +1,22 @@
+From 69ef3fb10068f866cd3834d434a03aac86d9b4b7 Mon Sep 17 00:00:00 2001
+From: IAMLIUBO <imliubo@makingfun.xyz>
+Date: Wed, 7 Jul 2021 21:35:44 +0800
+Subject: [PATCH] QRCode add CMakeLists.txt file
+
+---
+ CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 CMakeLists.txt
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+new file mode 100644
+index 0000000..73f372e
+--- /dev/null
++++ b/CMakeLists.txt
+@@ -0,0 +1,2 @@
++file(GLOB_RECURSE SOURCES ./*.c)
++add_library(lv_lib_qrcode STATIC ${SOURCES})
+\ No newline at end of file
+-- 
+2.25.1
+

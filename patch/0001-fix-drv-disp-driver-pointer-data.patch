@@ -1,0 +1,27 @@
+From 935c2131c8eeb9a39b294df59c4c78fbf66413f6 Mon Sep 17 00:00:00 2001
+From: IAMLIUBO <imliubo@makingfun.xyz>
+Date: Thu, 8 Jul 2021 18:32:42 +0800
+Subject: [PATCH] fix drv->disp->driver pointer data
+
+---
+ indev/evdev.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/indev/evdev.c b/indev/evdev.c
+index e85b7f4..d327d83 100644
+--- a/indev/evdev.c
++++ b/indev/evdev.c
+@@ -212,8 +212,8 @@ bool evdev_read(lv_indev_drv_t * drv, lv_indev_data_t * data)
+     /*Store the collected data*/
+ 
+ #if EVDEV_CALIBRATE
+-    data->point.x = map(evdev_root_x, EVDEV_HOR_MIN, EVDEV_HOR_MAX, 0, drv->disp->driver.hor_res);
+-    data->point.y = map(evdev_root_y, EVDEV_VER_MIN, EVDEV_VER_MAX, 0, drv->disp->driver.ver_res);
++    data->point.x = map(evdev_root_x, EVDEV_HOR_MIN, EVDEV_HOR_MAX, 0, drv->disp->driver->hor_res);
++    data->point.y = map(evdev_root_y, EVDEV_VER_MIN, EVDEV_VER_MAX, 0, drv->disp->driver->ver_res);
+ #else
+     data->point.x = evdev_root_x;
+     data->point.y = evdev_root_y;
+-- 
+2.25.1
+

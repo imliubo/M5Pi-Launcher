@@ -1,0 +1,21 @@
+From e00546374f793d734b8fcd92894fc1b3beace883 Mon Sep 17 00:00:00 2001
+From: IAMLIUBO <imliubo@makingfun.xyz>
+Date: Wed, 7 Jul 2021 21:09:33 +0800
+Subject: [PATCH] Add CMakeLists.txt file.
+
+---
+ CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 CMakeLists.txt
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+new file mode 100644
+index 0000000..071cf07
+--- /dev/null
++++ b/CMakeLists.txt
+@@ -0,0 +1,2 @@
++file(GLOB_RECURSE SOURCES InfoNES_Mapper.cpp InfoNES_pAPU.cpp InfoNES.cpp K6502.cpp linux/joypad_input.cpp)
++add_library(nes STATIC ${SOURCES})
+-- 
+2.25.1
+

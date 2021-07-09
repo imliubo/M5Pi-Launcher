@@ -1,0 +1,22 @@
+From 7a4199cb41ca55e15a71b17f568e26ef99c4b40e Mon Sep 17 00:00:00 2001
+From: IAMLIUBO <imliubo@makingfun.xyz>
+Date: Thu, 8 Jul 2021 18:12:23 +0800
+Subject: [PATCH] PNG add CMakeLists.txt file
+
+---
+ CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 CMakeLists.txt
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+new file mode 100644
+index 0000000..ae54e79
+--- /dev/null
++++ b/CMakeLists.txt
+@@ -0,0 +1,2 @@
++file(GLOB_RECURSE SOURCES ./*.c)
++add_library(lv_lib_png STATIC ${SOURCES})
+\ No newline at end of file
+-- 
+2.25.1
+

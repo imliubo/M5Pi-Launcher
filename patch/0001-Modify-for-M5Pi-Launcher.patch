@@ -1,0 +1,106 @@
+From 8f94e7d276b61026ffa18276968b2417e36188f6 Mon Sep 17 00:00:00 2001
+From: IAMLIUBO <imliubo@makingfun.xyz>
+Date: Wed, 7 Jul 2021 21:47:36 +0800
+Subject: [PATCH] Modify for M5Pi Launcher
+
+---
+ src/lv_demo_music/lv_demo_music.c      | 8 ++++----
+ src/lv_demo_music/lv_demo_music.h      | 2 +-
+ src/lv_demo_music/lv_demo_music_list.c | 6 +++---
+ src/lv_demo_music/lv_demo_music_main.c | 8 ++++----
+ 4 files changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/src/lv_demo_music/lv_demo_music.c b/src/lv_demo_music/lv_demo_music.c
+index 0cbaaf4..bc83761 100644
+--- a/src/lv_demo_music/lv_demo_music.c
++++ b/src/lv_demo_music/lv_demo_music.c
+@@ -111,12 +111,12 @@ static const uint32_t time_list[] = {
+  *   GLOBAL FUNCTIONS
+  **********************/
+ 
+-void lv_demo_music(void)
++void lv_demo_music(lv_obj_t * parent)
+ {
+-    lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0x343247), 0);
++    lv_obj_set_style_bg_color(parent, lv_color_hex(0x343247), 0);
+ 
+-    list = _lv_demo_music_list_create(lv_scr_act());
+-    ctrl = _lv_demo_music_main_create(lv_scr_act());
++    ctrl = _lv_demo_music_main_create(parent);
++    list = _lv_demo_music_list_create(parent);
+ 
+ #if LV_DEMO_MUSIC_AUTO_PLAY
+     lv_timer_create(auto_step_cb, 1000, NULL);
+diff --git a/src/lv_demo_music/lv_demo_music.h b/src/lv_demo_music/lv_demo_music.h
+index 77ae838..823ee70 100644
+--- a/src/lv_demo_music/lv_demo_music.h
++++ b/src/lv_demo_music/lv_demo_music.h
+@@ -35,7 +35,7 @@ extern "C" {
+  * GLOBAL PROTOTYPES
+  **********************/
+ 
+-void lv_demo_music(void);
++void lv_demo_music(lv_obj_t * parent);
+ const char * _lv_demo_music_get_title(uint32_t track_id);
+ const char * _lv_demo_music_get_artist(uint32_t track_id);
+ const char * _lv_demo_music_get_genre(uint32_t track_id);
+diff --git a/src/lv_demo_music/lv_demo_music_list.c b/src/lv_demo_music/lv_demo_music_list.c
+index 234d9fc..078f084 100644
+--- a/src/lv_demo_music/lv_demo_music_list.c
++++ b/src/lv_demo_music/lv_demo_music_list.c
+@@ -74,7 +74,7 @@ lv_obj_t * _lv_demo_music_list_create(lv_obj_t * parent)
+     static const lv_coord_t grid_rows[] = {22,  17, LV_GRID_TEMPLATE_LAST};
+ #endif
+     lv_style_init(&style_btn);
+-    lv_style_set_bg_opa(&style_btn, LV_OPA_TRANSP);
++    lv_style_set_bg_opa(&style_btn, LV_OPA_COVER);
+     lv_style_set_grid_column_dsc_array(&style_btn, grid_cols);
+     lv_style_set_grid_row_dsc_array(&style_btn, grid_rows);
+     lv_style_set_grid_row_align(&style_btn, LV_GRID_ALIGN_CENTER);
+@@ -93,8 +93,8 @@ lv_obj_t * _lv_demo_music_list_create(lv_obj_t * parent)
+     lv_style_set_bg_color(&style_btn_chk, lv_color_hex(0x4c4965));
+ 
+     lv_style_init(&style_btn_dis);
+-    lv_style_set_text_opa(&style_btn_dis, LV_OPA_40);
+-    lv_style_set_img_opa(&style_btn_dis, LV_OPA_40);
++    lv_style_set_text_opa(&style_btn_dis, LV_OPA_COVER);
++    lv_style_set_img_opa(&style_btn_dis, LV_OPA_COVER);
+ 
+     lv_style_init(&style_title);
+     lv_style_set_text_font(&style_title, font_medium);
+diff --git a/src/lv_demo_music/lv_demo_music_main.c b/src/lv_demo_music/lv_demo_music_main.c
+index a4b0a50..77bf975 100644
+--- a/src/lv_demo_music/lv_demo_music_main.c
++++ b/src/lv_demo_music/lv_demo_music_main.c
+@@ -220,7 +220,7 @@ lv_obj_t * _lv_demo_music_main_create(lv_obj_t * parent)
+     lv_obj_set_style_text_line_space(title, 8, 0);
+     lv_obj_fade_out(title, 500, INTRO_TIME);
+     lv_obj_align_to(logo, spectrum_obj, LV_ALIGN_CENTER, 0, 0);
+-    lv_obj_align_to(title, logo, LV_ALIGN_OUT_LEFT_MID, -20, 0);
++    lv_obj_align_to(title, logo, LV_ALIGN_OUT_BOTTOM_MID, 0, 30);
+ 
+     lv_anim_set_path_cb(&a, lv_anim_path_ease_in);
+     lv_anim_set_var(&a, logo);
+@@ -313,7 +313,7 @@ static lv_obj_t * create_cont(lv_obj_t * parent)
+     /*Create a container for the player*/
+     lv_obj_t * player = lv_obj_create(main_cont);
+     lv_obj_set_y(player, - LV_DEMO_MUSIC_HANDLE_SIZE);
+-    lv_obj_set_size(player, LV_HOR_RES, LV_VER_RES + LV_DEMO_MUSIC_HANDLE_SIZE * 2);
++    lv_obj_set_size(player, LV_HOR_RES, LV_VER_RES + 20);
+ 
+     lv_obj_set_style_bg_color(player, lv_color_hex(0xffffff), 0);
+     lv_obj_set_style_border_width(player, 0, 0);
+@@ -324,8 +324,8 @@ static lv_obj_t * create_cont(lv_obj_t * parent)
+      * It is used only to snap it to center.*/
+     lv_obj_t * placeholder = lv_obj_create(main_cont);
+     lv_obj_remove_style_all(placeholder);
+-    lv_obj_set_size(placeholder, lv_pct(100), LV_VER_RES -2 *  LV_DEMO_MUSIC_HANDLE_SIZE);
+-    lv_obj_set_y(placeholder, LV_VER_RES + LV_DEMO_MUSIC_HANDLE_SIZE);
++    lv_obj_set_size(placeholder, lv_pct(100), 0);
++    lv_obj_set_y(placeholder, 0);
+     lv_obj_clear_flag(placeholder, LV_OBJ_FLAG_CLICKABLE);
+ 
+     lv_obj_update_layout(main_cont);
+-- 
+2.25.1
+

@@ -1,0 +1,42 @@
+From d110a7bf4e9dbde077757f52bc9d6efadc712289 Mon Sep 17 00:00:00 2001
+From: IAMLIUBO <imliubo@makingfun.xyz>
+Date: Thu, 8 Jul 2021 19:33:33 +0800
+Subject: [PATCH] Add pthread_testcancel function for back to menu
+
+---
+ InfoNES.cpp | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/InfoNES.cpp b/InfoNES.cpp
+index beaf40f..cbb5ae9 100755
+--- a/InfoNES.cpp
++++ b/InfoNES.cpp
+@@ -40,6 +40,7 @@
+ #include "InfoNES_Mapper.h"
+ #include "InfoNES_pAPU.h"
+ #include "K6502.h"
++#include "pthread.h"
+ 
+ /*-------------------------------------------------------------------*/
+ /*  NES resources                                                    */
+@@ -569,6 +570,8 @@ void InfoNES_Main()
+     /*  Start a NES emulation                                            */
+     /*-------------------------------------------------------------------*/
+     InfoNES_Cycle();
++    // Back to home menu
++    pthread_testcancel();
+   }
+ 
+   // Completion treatment
+@@ -640,6 +643,8 @@ void InfoNES_Cycle()
+       return;  // To the menu screen
+     // HSYNC Wait
+     InfoNES_Wait();
++    // Back to home menu
++    pthread_testcancel();
+   }
+ }
+ 
+-- 
+2.25.1
+

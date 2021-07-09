@@ -1,0 +1,22 @@
+From 0cd9b05ac51f0bab287d362326c9067fe98c9e18 Mon Sep 17 00:00:00 2001
+From: IAMLIUBO <imliubo@makingfun.xyz>
+Date: Thu, 8 Jul 2021 18:46:23 +0800
+Subject: [PATCH] fs_if add CMakeLists.txt file
+
+---
+ CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 CMakeLists.txt
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+new file mode 100644
+index 0000000..3a22578
+--- /dev/null
++++ b/CMakeLists.txt
+@@ -0,0 +1,2 @@
++file(GLOB_RECURSE SOURCES ./*.c)
++add_library(lv_fs_if STATIC ${SOURCES})
+\ No newline at end of file
+-- 
+2.25.1
+
