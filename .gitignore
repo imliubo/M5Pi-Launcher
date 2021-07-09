@@ -50,3 +50,15 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# folder
+.vscode/
+build/
+lv_demos/
+lv_drivers/
+lv_fs_if/
+lv_lib_png/
+lv_lib_qrcode/
+lvgl/
+nes/
+launcher/src/assets/images/
